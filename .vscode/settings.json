@@ -1,0 +1,4 @@
+{
+    "reactSnippets.settings.prettierEnabled": true,
+    "eslint.format.enable": true
+}

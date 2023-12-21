@@ -1,0 +1,53 @@
+.popular-hostel-container{
+    display: flex;
+    border-top: 1px solid black;
+    border-radius: 10px;
+    gap:1rem;
+    padding: 0.5rem 0.3rem 0.5rem 0.3rem;
+    background-color: #dea;
+}
+.popular-hostel-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+.hostel-managed-name{
+    font-size: 10px;
+    padding-right: 0.2rem;
+}
+.joined-chat{
+    cursor: pointer;
+    padding: 0.3rem;
+    border-radius: 10px;
+}
+.joined-chat:hover{
+    background: green;
+    transition: all 0.3s ease;
+}
+.hostel-details-join{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.image-container {
+    width: 150px;
+    height: 100px; /* Fixed height */
+    overflow: hidden; /* Hide any overflow */
+    margin: 0;
+
+  }
+.popular-hostel-images{
+    width:100%;
+    height:100px;
+    object-fit: cover;
+    border-radius: 5px;
+
+    /* transform: scale(4); */
+}
+
+  
+  
+  

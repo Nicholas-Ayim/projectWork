@@ -1,0 +1,62 @@
+.hostel-manager-container{
+    display: flex;
+    height: 85vh;
+    align-items: center;
+    justify-content: center;
+}
+.form-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex:1;
+}
+.form-container>label{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex:1;
+    padding-bottom: 1rem;
+}
+input{
+    height: 30px;
+    width:200px;
+    border-radius: 5px;
+}
+.default-img{
+    object-fit: fill;
+    border: 1px solid black;
+    width:100px;
+    height:100px;
+    border-radius: 100%;
+}
+.profile-container{
+    position: relative;
+}
+.add-profile{
+    position: absolute;
+    bottom: 0;
+    right:1rem;
+    border-radius: 100%;
+    padding: 0.2rem;
+    cursor: pointer;
+    background: #eee;
+    font-weight: 900;
+    font-size: 15px;
+    
+}
+.user-changes{
+    display: flex;
+    gap:1rem;
+}
+.submit{
+    padding: 0.3rem;
+}
+.submit:hover{
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 0.3rem;
+    background: green;
+    transition: all 0.3s ease;
+}

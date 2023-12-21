@@ -1,0 +1,183 @@
+* {
+  padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+}
+.header{
+  color:#add8e6;
+
+}
+.home-image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex: 1;
+}
+.img-container {
+  border-top: 2px solid red;
+  border-right: 2px solid orangered;
+  border-bottom: 2px solid blue;
+  border-left: 2px solid whitesmoke;
+  border-radius: 15px;
+}
+.home-image {
+  object-fit: contain;
+  width: 100%;
+  border-radius: 15px;
+}
+.locations-container {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+}
+.locations-container .ucc-places {
+  width: 50%;
+  height: fit-content;
+  /* border: 1px solid black; */
+}
+.ucc-places-header {
+  text-align: center;
+  padding-top: 0.3rem;
+  font-size: 15px;
+  font-weight: 700;
+}
+.locations-container .popular-hostels {
+  width: 50%;
+  height: 400px;
+  /* border: 1px solid black; */
+}
+.place-image-container {
+  height: 400px;
+  overflow-y: scroll;
+  width: 100%;
+  padding-top: 0.3rem;
+}
+.image-container {
+  width: 100%;
+}
+.place-image {
+  object-fit: contain;
+  width: 100%;
+  border-radius: 15px;
+}
+
+.place-details {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0.3rem;
+}
+.popular-hostels {
+  display: flex;
+  flex-direction: column;
+}
+.sub-header-ayensu {
+  text-align: center;
+  color: #b0e5af;
+}
+.popular-hostels-ayensu {
+  height: 400px;
+  overflow-y: scroll;
+  width: 100%;
+}
+.popular-hostels .ayensu-container {
+  display: flex;
+  flex-direction: column;
+}
+.popular-hostels .ayensu-image {
+  object-fit: contain;
+  width: 100%;
+}
+
+.sub-header-apeowosika {
+  text-align: center;
+  color: #b0e5af;
+}
+.popular-hostels-apeowosika {
+  height: 400px;
+  overflow-y: scroll;
+  width: 100%;
+}
+.popular-hostels .apeowosika-container {
+  display: flex;
+  flex-direction: column;
+}
+.popular-hostels .apewosika-image {
+  object-fit: contain;
+  width: 100%;
+}
+
+.sub-header-kwapro {
+  text-align: center;
+  color: #b0e5af;
+}
+.popular-hostels-kwapro {
+  height: 400px;
+  overflow-y: scroll;
+  width: 100%;
+}
+.popular-hostels .kwapro-container {
+  display: flex;
+  flex-direction: column;
+}
+.popular-hostels .kwapro-image {
+  object-fit: contain;
+  width: 100%;
+}
+.service-container{
+padding-top: 1rem;
+padding-left: 0.3rem;
+width:50%;
+}
+.service-header{
+text-align: center;
+padding-bottom: 0.5rem;
+color:#add8e6;
+font-weight: 700;
+}
+.service-message{
+font-size: 12px;
+text-indent: 0.5rem;
+word-spacing: 0.3rem;
+}
+.service-image-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex:1;
+  width:100%;
+  height: fit-content;
+  border-radius: 25px;
+}
+.service-image{
+  object-fit: cover;
+  width:100%;
+  height: fit-content;
+  border-radius: 25px;
+}
+.get-started{
+  outline: none;
+  padding: 0.3rem;
+}
+.get-started:hover{
+  cursor: pointer;
+  background: rgba(0, 128, 66, 0.824);
+  padding: 0.3rem;
+  border-radius: 5px;
+
+}
+.chat-icon{
+  line-height: 10px;
+  color:red;
+}
+.about-us{
+  padding-top: 1rem;
+}
+.sub-header-aboutUs{
+  font-size: 18px;
+  color:#e5afdee6;
+  padding-bottom: 1rem;
+
+}

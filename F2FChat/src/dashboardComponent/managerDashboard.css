@@ -1,0 +1,81 @@
+*{
+  padding:0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.dashboard-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dashboard-title h4{
+    font-size: 20px;
+    color:blue;
+}
+.dashboard-container {
+  display: flex;
+  width: 100%;
+  padding-top: 0.5rem;
+}
+
+.manager-sidebar {
+  border: 1px solid black;
+  width: calc(100% - 80%);
+  height:fit-content;
+  border-radius: 5px;
+}
+.manager-sidebar:hover{
+  background-color: #eee;
+  cursor: pointer;
+  border:none;
+  transition: all 1s ease;
+
+}
+.manager-sidebar-nest {
+  display: flex;
+  height: 60vh;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+  padding-left: 0.3rem;
+}
+.personal-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.setting-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 1rem;
+}
+
+.manager-form-container {
+  border: 1px solid red;
+  width: calc(100% - 20%);
+}
+.manager-form-container:hover{
+  background: #ef32e5dc;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 2s ease-in-out;
+}
+.manager-pic{
+    object-fit: fill;
+    width:50px;
+    height:50px;
+    border-radius: 100%;
+    border:1px solid #ef32ad;
+    font-size: 12px;
+    text-align: center;
+    line-height: 50px;
+}
+.hostelManaged-name{
+    text-transform: capitalize;
+}
+.manager-online{
+    color: green;
+}
+

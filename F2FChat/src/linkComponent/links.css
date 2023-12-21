@@ -1,0 +1,12 @@
+.links{
+    display: flex;
+    justify-content: space-between;
+}
+.signup-login small{
+    margin:1rem;
+}
+.ucc-image{
+    height:70px;
+    width:100%;
+    object-fit: contain;
+}
