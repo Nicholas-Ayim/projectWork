@@ -3,19 +3,19 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const chatApi = createApi({
   reducerPath: "chatApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/contact/",
+    baseUrl: "http://localhost:5000/contact",
   }),
   endpoints: (builder) => ({
-    managerProfile:builder.mutation({
-      query:(profile)=>({
-        url:"/manager/data",
-        method:"GET",
-        body:profile
-      })
+    managerProfile: builder.mutation({
+      query: (profile) => ({
+        url: "/manager/data",
+        method: "GET",
+        body: profile,
+      }),
     }),
     signupStudent: builder.mutation({
       query: (studentData) => ({
-        url: "signup/student",
+        url: "/signup/student",
         method: "POST",
         body: studentData,
       }),
@@ -41,12 +41,6 @@ const chatApi = createApi({
         body: managerData,
       }),
     }),
-    logout: builder.mutation({
-      query: ({ payload }) => ({
-        method: "DELETE",
-        body: payload,
-      }),
-    }),
 
     hostelDetails: builder.mutation({
       query: ({ hostelId, hostelData }) => ({
@@ -55,6 +49,13 @@ const chatApi = createApi({
         body: hostelData,
       }),
     }),
+    logout: builder.mutation({
+      query: ({ id }) => ({
+        url: `/logout/${id}`,
+        method: "DELETE",
+      }),
+    }),
+    
   }),
 });
 

@@ -11,8 +11,6 @@ router.post("/managerinfo/:id",async(req,res)=>{
         roomsPictures
       })
      await newHostelInfo.save()
-
-
       //finding the hostel hostelDetails and updating
      const hostelUpdtated = await Hostel.findOneAndUpdate(
       {_id: (req.params.id)},
@@ -25,9 +23,6 @@ router.post("/managerinfo/:id",async(req,res)=>{
       }
 
       res.status(201).json(newHostelInfo)
-
-
-
     }catch(error){
        let msg;
        if(error){
@@ -38,5 +33,16 @@ router.post("/managerinfo/:id",async(req,res)=>{
         res.status(400).json(msg)
        }
     }
+})
+
+router.delete("/delete/managerInfo/:id",async(req,res)=>{
+   HostelInfo.findById(req.params.id)
+   .then((found)=>{
+    if(!found){
+      res.status(404).json('no hostel info found')
+    }
+    found.deleteOne()
+    .then((userdeleted)=>res.json(userdeleted))
+   })
 })
 module.exports = router

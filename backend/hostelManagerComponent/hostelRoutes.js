@@ -1,19 +1,34 @@
 const router = require('express').Router()
-
 const HostelManager = require("../hostelManagerComponent/hostel")
 
 router.get("/manager/data",async(req,res)=>{
   HostelManager.find()
   .then((data)=>res.json(data))
+
 })
+router.delete('/logout/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userFound = await HostelManager.findById(id);
+
+    if (userFound) {
+      userFound.status = "offline";
+      await userFound.save();
+      console.log(userFound.status)
+      res.status(200).json({ message: "Logout successful" });
+    } else {
+      res.status(404).json({ error: "User not found" });
+    }
+  } catch (error) {
+    console.error('Failed to logout', error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 router.post('/signup/manager',async(req,res)=>{
     try{
-        const {name,hostelManaged,contact,hostelRegistrationNumber,picture,password} = await req.body
-        // if(!hostelRegistrationNumber){
-        //     msg = 'please provide hostel registration number'
-        //     res.status(400).json(msg)
-        // }
+        const {name,hostelManaged,contact,hostelRegistrationNumber,picture,password} =  req.body
+        
         HostelManager.create({
             name,
             hostelManaged,
@@ -24,6 +39,7 @@ router.post('/signup/manager',async(req,res)=>{
         })
         .then((newManager)=> res.json(newManager))
         .catch(error=>res.status(400).json('new manager NOT added'+error))
+        
     }
     catch(err){
         let msg;
@@ -39,7 +55,6 @@ router.post("/login/manager", async (req, res) => {
     try {
       const { contact, password } = req.body;
   
-      //find the user by the credentials
       const manager = await HostelManager.findByCredentials(contact, password);
       manager.status = "online";
       await manager.save();

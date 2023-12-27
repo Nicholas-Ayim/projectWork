@@ -18,11 +18,14 @@ export default function LoginManager() {
       if(data){
         console.log("login manager...",data)
         navigate("/manager/dashboard")
+      
       }
     })
   };
   return (
     <>
+    <div>
+    </div>
       <div className="main-container">
         <div className="login-manager-container">
           <h3>LOGINING AS HOSTEL MANAGER</h3>

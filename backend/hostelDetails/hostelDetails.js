@@ -4,7 +4,7 @@ const HostelDetails = new mongoose.Schema({
     hostelName:String,
     totalRooms:String,
     totalFloors:String,
-    roomsPictures:[]
+    roomsPictures:[],
 })
 
 const HostelInfo = mongoose.model("HostelDetails",HostelDetails)

@@ -10,7 +10,7 @@ const HostelManager = new mongoose.Schema({
     hostelManaged:{
         type:String,
         unique:true,
-        primmary:true,
+        primary:true,
         required:[true,"cannot be blank"]
     },
     picture:{
@@ -20,13 +20,13 @@ const HostelManager = new mongoose.Schema({
     contact:{
         type:String,
         unique:true,
-        primmary:true,
+        primary:true,
         required:[true,"cannot be blank"]
     },
     hostelRegistrationNumber:{
         type:Number,
         unique:true,
-        primmary:true,
+        primary:true,
         required:[true,"cannot be blank"]
     },
     hostelLocation:{

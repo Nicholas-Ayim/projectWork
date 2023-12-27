@@ -10,7 +10,7 @@ export default function DefaultHostelSearch() {
 
   useEffect(() => {
     if (data) {
-      console.log("Manager data:", data.length);
+      // console.log("Manager data:", data.length);
       awaitData(data);
     }
 
@@ -23,7 +23,7 @@ export default function DefaultHostelSearch() {
   const [isScaledArray, setIsScaledArray] = useState([]);
 
   function awaitData(data) {
-    console.log("the data is in", data);
+    // console.log("the data is in", data);
 
     const uniqueHostels = data.map((item) => ({
       id: item._id,
@@ -33,13 +33,6 @@ export default function DefaultHostelSearch() {
     }));
 
     setHostels(uniqueHostels);
-    // Initialize the isScaledArray with false for each hostel
-    // setIsScaledArray(Array(uniqueHostels.length).fill(false));
-  }
-
-  function joinHostel(e) {
-    e.preventDefault();
-    console.log("student wants to join");
   }
 
   function handleScaled(index) {
@@ -53,6 +46,9 @@ export default function DefaultHostelSearch() {
     });
   }
 
+  function join(){
+    console.log("joined")
+  }
   return (
     <>
       <div>
@@ -87,7 +83,7 @@ export default function DefaultHostelSearch() {
                 </div>
                 <div className="hostel-details-join">
                   <p className="hostel-managed-name">{hostel.hostelManaged}</p>
-                  <button className="joined-chat" onClick={joinHostel}>
+                  <button className="joined-chat" onClick={() => join}>
                     join
                   </button>
                 </div>

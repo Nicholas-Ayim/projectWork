@@ -49,7 +49,24 @@ router.post('/signup/student',async (req,res)=>{
     }
   });
 
-
+  router.delete('/logout/:id', async (req, res) => {
+    try {
+      const { id } = req.params;
+      const userFound = await Contacts.findById(id);
+  
+      if (userFound) {
+        userFound.status = "offline";
+        await userFound.save();
+        console.log(userFound.status)
+        res.status(200).json({ message: "Logout successful" });
+      } else {
+        res.status(404).json({ error: "User not found" });
+      }
+    } catch (error) {
+      console.error('Failed to logout', error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  });
   router.delete("/delete/student/:id",(req,res)=>{
     Contacts.findById(req.params.id)
     .then((user)=>

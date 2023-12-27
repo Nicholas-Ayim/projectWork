@@ -10,7 +10,6 @@ export default function StudentDashboard() {
   const [managerInfo, { data, isLoading, isError, error }] =
     useManagerProfileMutation();
   const [searchWord, setSearchWord] = useState("");
-  const [foundWord, setFoundWord] = useState("");
   const [hostelFound, setHostelFound] = useState([]);
 
   useEffect(() => {
@@ -30,6 +29,7 @@ export default function StudentDashboard() {
       id: manager._id,
       hostelManaged: manager.hostelManaged,
       hostelDetails: manager.hostelDetails,
+      contact: manager.contact,
     }));
     setHostelFound(hostelSearchDetails);
   }
@@ -67,7 +67,6 @@ export default function StudentDashboard() {
             />
           </div>
           <PopularHostel
-            foundWord={foundWord}
             searchWord={searchWord}
             hostelFound={hostelFound}
             searchFunction={() => handleSearch()}
