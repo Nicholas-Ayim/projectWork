@@ -1,0 +1,62 @@
+.sub-heading-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+}
+.request-options {
+  display: flex;
+  gap: 0.2rem;
+  /* padding-left:0.3rem; */
+}
+h6 {
+  font-weight: 800;
+  font-size: 9px;
+}
+.find-request {
+  position: relative;
+  display: flex;
+}
+.find-student-input {
+  text-indent: 1rem;
+  accent-color: grey;
+  outline: none;
+  border: 1px thin rgb(2, 2, 109);
+  width: 150px;
+}
+.request-search-icon {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  color: blue;
+}
+
+@media screen and (min-width: 690px) {
+  .request-options {
+    display: flex;
+    gap: 0.5rem;
+    padding-left: 2;
+  }
+  h6 {
+    font-weight: 800;
+    font-size: 15px;
+  }
+  .find-request {
+    position: relative;
+    display: flex;
+    padding-right: 2rem;
+  }
+  .find-student-input {
+    text-indent: 1rem;
+    accent-color: grey;
+    outline: none;
+    border: 1px thin blue;
+    width: 300px;
+  }
+  .request-search-icon {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    color: blue;
+  }
+}
