@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import chatApi from "../services/chatApi";
 const contactSlice = createSlice({
   name: "contacts",
-  initialState:{},
+  initialState: {},
   reducers: {},
   extraReducers: (builder) => {
     builder.addMatcher(
@@ -42,14 +42,21 @@ const contactSlice = createSlice({
       }
     );
     builder.addMatcher(
+      chatApi.endpoints.managerRequest.matchFulfilled,
+      (state, { payload }) => {
+        return { ...state, managerRequest: payload };
+      }
+    );
+    builder.addMatcher(
       chatApi.endpoints.logout.matchFulfilled,
       (state, { payload }) => {
         console.log("logout successfully", payload);
         return {
-          ...state,
           student: null,
           hostelDetails: null,
           managerInfo: null,
+          managerRequest:null,
+          contacts:null
         };
       }
     );
@@ -60,5 +67,6 @@ export const selectAllManagerInfo = (state) => state.contacts.managerInfo;
 export const filledForm = (state) => state.contacts.student.hostelDetails;
 export const newFilledForm = (state) => state.contacts.hostelDetails;
 export const selectAllContacts = (state) => state.contacts?.student;
-export const selectAll= (state) => state.contacts;
+export const selectAll = (state) => state.contacts;
+export const selectAllRequest = (state) => state.contacts.managerRequest
 export default contactSlice.reducer;

@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import { useManagerProfileMutation } from "../services/chatApi";
 import { ContextApp } from "../contextComponent/context";
 import { useContext } from "react";
-
-
+import { selectAllContacts } from "../features/chatSlice";
+import { useSelector } from "react-redux";
 export default function Search({ searchWord }) {
-  const [managerInfo, { data, isLoading, isError }] = useManagerProfileMutation();
+  const [managerInfo, { data, isLoading, isError }] =
+    useManagerProfileMutation();
   const [hostel, setHostel] = useState([]);
+  const [allHostels, setAllHostels] = useState([]);
+  const currentStudent = useSelector(selectAllContacts);
   const { socket } = useContext(ContextApp);
 
   useEffect(() => {
@@ -16,6 +19,7 @@ export default function Search({ searchWord }) {
   useEffect(() => {
     if (data) {
       incoming(data);
+      setAllHostels(data);
     }
   }, [data, searchWord]);
 
@@ -27,14 +31,13 @@ export default function Search({ searchWord }) {
     }));
     setHostel(managerDetails);
   }
-
-  async function handleJoin(e, hostelInfo) {
+  async function handleJoin(e, hostelInfo, allData, currentStudent) {
     e.preventDefault();
     try {
       console.log(hostelInfo);
-      await socket.emit('new-request', hostelInfo);
+      await socket.emit("join-request", hostelInfo, allData, currentStudent);
     } catch (error) {
-      console.log('error in emitting data', error);
+      console.log("error in emitting data", error);
     }
   }
 
@@ -46,16 +49,17 @@ export default function Search({ searchWord }) {
           return (
             <div key={data._id} className="popular-hostel-container">
               <div className="images-container">
-                {Object.values(data.hostelDetails)[3].map((image, index) => (
-                  index === 0 && (
-                    <img
-                      key={index}
-                      src={image}
-                      alt="no-image"
-                      className="popular-hostel-images"
-                    />
-                  )
-                ))}
+                {Object.values(data.hostelDetails)[3].map(
+                  (image, index) =>
+                    index === 0 && (
+                      <img
+                        key={index}
+                        src={image}
+                        alt="no-image"
+                        className="popular-hostel-images"
+                      />
+                    )
+                )}
               </div>
               <div className="hostel-details-join">
                 <small className="hostel-managed-name">
@@ -67,7 +71,9 @@ export default function Search({ searchWord }) {
                 {Object.values(data.hostelDetails)[0] && (
                   <button
                     className="joined-chat"
-                    onClick={(e) => handleJoin(e, data)}
+                    onClick={(e) =>
+                      handleJoin(e, data, allHostels, currentStudent)
+                    }
                   >
                     join
                   </button>
@@ -76,7 +82,7 @@ export default function Search({ searchWord }) {
             </div>
           );
         }
-        return null
+        return null;
       })}
     </div>
   );

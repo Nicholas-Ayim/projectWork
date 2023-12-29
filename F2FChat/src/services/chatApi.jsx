@@ -49,13 +49,19 @@ const chatApi = createApi({
         body: hostelData,
       }),
     }),
+    managerRequest: builder.mutation({
+      query: (requestInfo) => ({
+        url: "/joinRequest",
+        method: "GET",
+        body: requestInfo,
+      }),
+    }),
     logout: builder.mutation({
       query: ({ id }) => ({
         url: `/logout/${id}`,
         method: "DELETE",
       }),
     }),
-    
   }),
 });
 
@@ -67,5 +73,6 @@ export const {
   useSignupStudentMutation,
   useLogoutMutation,
   useHostelDetailsMutation,
+  useManagerRequestMutation,
 } = chatApi;
 export default chatApi;

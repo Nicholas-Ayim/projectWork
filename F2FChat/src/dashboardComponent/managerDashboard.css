@@ -78,4 +78,16 @@
 .manager-online{
     color: green;
 }
-
+.request-message-container{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.sender-info{
+  display: flex;
+}
+.request-image{
+  width:50px;
+  border-radius: 100%;
+  object-fit: contain;
+}
