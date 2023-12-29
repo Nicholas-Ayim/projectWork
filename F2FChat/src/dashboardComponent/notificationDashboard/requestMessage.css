@@ -1,0 +1,23 @@
+
+.request-container{
+    display: flex;
+    height:50px;
+    border:1px solid black;
+    width:100%;
+    margin-top: 1rem;
+}
+
+
+
+
+@media screen and (min-width:690px) {
+    .request-container{
+        display: flex;
+        height:50px;
+        border:1px solid white;
+        background-color: whitesmoke;
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+        width:100%;
+        margin-top: 1rem;
+    }
+}
