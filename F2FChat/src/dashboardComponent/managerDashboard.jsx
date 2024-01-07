@@ -2,7 +2,7 @@ import "./managerDashboard.css";
 import {
   selectAllContacts,
   newFilledForm,
-  filledForm,
+  filledForm
 } from "../features/chatSlice";
 import { useSelector } from "react-redux";
 import { useContext, useEffect, useRef, useState } from "react";
@@ -11,12 +11,14 @@ import HostelManagerForm from "../hostelManagerForm/hostelManagerForm";
 import { useManagerRequestMutation } from "../services/chatApi";
 import Notification from "./notificationDashboard/notification";
 import ManagerSideBar from "./managerSideBar/managerSideBar";
-import isEqual from "lodash"
+import { selectNewRequest } from "../features/chatSlice";
 export default function ManagerDashboard() {
   const { socket } = useContext(ContextApp);
   const managerSelected = useSelector(selectAllContacts);
   const [managerRequest, { data, isLoading, isError }] =
     useManagerRequestMutation();
+
+  const newRequestReceived = useSelector(selectNewRequest);
 
   const [newRequest, setNewRequest] = useState([]);
   useEffect(() => {
@@ -68,28 +70,33 @@ export default function ManagerDashboard() {
       }
     }
   }
-  const [onShow,setOnShow] = useState(false)
+  const [onShow, setOnShow] = useState(false);
   return (
     <>
-     <div className="dashboard-title">
+      <div className="dashboard-title">
         <h4>
           {managerSelected?.hostelManaged.toUpperCase()} HOSTEL MANAGER'S
           DASHBOARD
         </h4>
       </div>
       <div className="dashboard-container">
-      <ManagerSideBar
-        managerSelected={managerSelected}
-        checkForm={checkForm}
-        formExist={formExist}
-        handleEditForm={() => handleEditForm()}
-        onShow={onShow}
-        setOnShow={setOnShow}
-      />
-      <div className="manager-form-container">
-        <div>{formExist && <HostelManagerForm />}</div>
-        {onShow && <Notification newRequest={newRequest} />}
-      </div>
+        <ManagerSideBar
+          managerSelected={managerSelected}
+          checkForm={checkForm}
+          formExist={formExist}
+          handleEditForm={() => handleEditForm()}
+          onShow={onShow}
+          setOnShow={setOnShow}
+        />
+        <div className="manager-form-container">
+          <div>{formExist && <HostelManagerForm />}</div>
+          {onShow && (
+            <Notification
+              setNewRequest={setNewRequest}
+              newRequest={newRequest || newRequestReceived}
+            />
+          )}
+        </div>
       </div>
     </>
   );

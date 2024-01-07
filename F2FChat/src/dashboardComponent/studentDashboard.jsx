@@ -5,12 +5,22 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useManagerProfileMutation } from "../services/chatApi";
+import RequestLoading from "./loadingRequest/requestLoading";
+import Chat from "../chatComponent/chat";
 export default function StudentDashboard() {
   const studentDetails = useSelector(selectAllContacts);
   const [managerInfo, { data, isLoading, isError, error }] =
     useManagerProfileMutation();
   const [searchWord, setSearchWord] = useState("");
   const [hostelFound, setHostelFound] = useState([]);
+  const [requestSent, setRequestSent] = useState(false);
+  const [viewChat, setViewChat] = useState(false);
+
+  function handleChat(e) {
+    e.preventDefault();
+    console.log("to chat dashboard");
+    setViewChat(!viewChat);
+  }
 
   useEffect(() => {
     managerInfo();
@@ -29,7 +39,7 @@ export default function StudentDashboard() {
       id: manager._id,
       hostelManaged: manager.hostelManaged,
       hostelDetails: manager.hostelDetails,
-      contact: manager.contact,
+      contact: manager.contact
     }));
     setHostelFound(hostelSearchDetails);
   }
@@ -40,38 +50,54 @@ export default function StudentDashboard() {
   async function handleSearch() {}
   return (
     <>
+      <div>
+        {viewChat && <Chat setViewChat={setViewChat} viewChat={viewChat} />}
+      </div>
       <div className="student-dashboard-container">
-        <div className="student-left-sidebar">
-          <img
-            src={studentDetails.picture}
-            alt="no-image"
-            className="student-image"
-          />
-          <h5 className="student-name">{studentDetails.name}</h5>
-          <h5 className="student-index">{studentDetails.index}</h5>
-          <h5 className="student-email">{studentDetails.email}</h5>
-          <h5 className="student-status">{studentDetails.status}</h5>
-        </div>
-        <div className="student-right-sidebar">
-          <div className="search-bar-container">
-            <input
-              type="search"
-              value={searchWord}
-              className="search-bar"
-              placeholder="Search For Hostel Name ... eg: Aseda"
-              onChange={(e) => recomemndList(e)}
+        {!viewChat && (
+          <div className="student-left-sidebar">
+            <img
+              src={studentDetails.picture}
+              alt="no-image"
+              className="student-image"
             />
-            <FaSearch
-              className="search-icon"
-              onClick={(e) => handleSearch(e)}
-            />
+            <h5 className="student-name">{studentDetails.name}</h5>
+            <h5 className="student-index">{studentDetails.index}</h5>
+            <h5 className="student-email">{studentDetails.email}</h5>
+            <h5 className="student-status">{studentDetails.status}</h5>
+            <p onClick={(e) => handleChat(e)} className="to-chat">
+              chat
+            </p>
           </div>
-          <PopularHostel
-            searchWord={searchWord}
-            hostelFound={hostelFound}
-            searchFunction={() => handleSearch()}
-          />
+        )}
+        <div className="student-right-sidebar">
+          {!viewChat && (
+            <div className="search-bar-container">
+              <input
+                type="search"
+                value={searchWord}
+                className="search-bar"
+                placeholder="Search For Hostel Name ... eg: Aseda"
+                onChange={(e) => recomemndList(e)}
+              />
+              <FaSearch
+                className="search-icon"
+                onClick={(e) => handleSearch(e)}
+              />
+            </div>
+          )}
+          {!viewChat && (
+            <PopularHostel
+              searchWord={searchWord}
+              hostelFound={hostelFound}
+              searchFunction={() => handleSearch()}
+              setRequestSent={setRequestSent}
+              viewChat={viewChat}
+              setViewChat={setViewChat}
+            />
+          )}
         </div>
+        <div>{requestSent && <RequestLoading />}</div>
       </div>
     </>
   );

@@ -4,12 +4,15 @@ import { ContextApp } from "../contextComponent/context";
 import { useContext } from "react";
 import { selectAllContacts } from "../features/chatSlice";
 import { useSelector } from "react-redux";
-export default function Search({ searchWord }) {
+import { formatDistanceToNow, sub } from "date-fns";
+export default function Search({ searchWord, setRequestSent }) {
   const [managerInfo, { data, isLoading, isError }] =
     useManagerProfileMutation();
   const [hostel, setHostel] = useState([]);
   const [allHostels, setAllHostels] = useState([]);
   const currentStudent = useSelector(selectAllContacts);
+  // const [currentDate,setCurrentDate] = useState()
+
   const { socket } = useContext(ContextApp);
 
   useEffect(() => {
@@ -27,12 +30,17 @@ export default function Search({ searchWord }) {
     const managerDetails = data.map((item) => ({
       _id: item._id,
       hostelName: item.hostelManaged,
-      hostelDetails: item.hostelDetails,
+      hostelDetails: item.hostelDetails
     }));
     setHostel(managerDetails);
   }
   async function handleJoin(e, hostelInfo, allData, currentStudent) {
     e.preventDefault();
+
+    setTimeout(() => {
+      setRequestSent(true);
+      window.location.reload();
+    }, 3000);
     try {
       console.log(hostelInfo);
       await socket.emit("join-request", hostelInfo, allData, currentStudent);

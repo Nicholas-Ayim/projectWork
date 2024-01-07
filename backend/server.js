@@ -6,10 +6,12 @@ const Manager = require("./hostelManagerComponent/hostel")
 const Student = require("./contact")
 const HostelInfo = require("./hostelDetails/hostelDetails")
 const MessengerRequest = require("./messageRequest/request")
-
+const hostelMembers = require('./hostelMembers/hostelMembers')
 const app = express()
 const http = require('http')
 const cors = require("cors")
+
+const format = require('date-fns/format')
 const server = http.createServer(app)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -28,6 +30,10 @@ app.use('/contact',hostelDetailsRoutes)
 const RequestRoutes = require("./messageRequest/requestRoute")
 app.use('/contact',RequestRoutes)
 
+
+const hostelMembersRoutes = require("./hostelMembers/hostelMembersRoutes")
+app.use('/contact',hostelMembersRoutes)
+
 const { Server} = require("socket.io")
 
 const io = new Server(server,{
@@ -37,15 +43,7 @@ const io = new Server(server,{
     }
 })
 
-// async function toSpecificHostel(hostelName){
-//     let messageId = await MessengerRequest.aggregate([
-//         { $match: { to: hostelName } },
-//         { $group: { _id: "$date", messagesByDate: { $push: "$$ROOT" } } },
-//     ])
-//     return messageId
-// }
-
-// let hostelsAvaliable = []
+     
 
   io.on("connection", (socket) => {
 
@@ -54,32 +52,34 @@ const io = new Server(server,{
         //   console.log('selected hostel',hostelSelected)
           const {name,contact,picture,email} = currentStudent
           const {hostelName} = hostelSelected
-
-          const managerRequest = await MessengerRequest.create({
+           
+          const currentDate = new Date()
+          const dateReceived = format(currentDate, "MMM-do-yyyy");
+           const timeReceived = format(new Date(),"HH-mm-ss")
+           socket.emit('requestTime',timeReceived)
+         const managerRequest = await MessengerRequest.create({
             to:hostelName,
             messenger:`${name}`,
             content:`incoming message from ${name} to ${hostelName} Hostel `,
             messengerPic: picture,
-            timeSent:'now'
+            dateSent:dateReceived,
+            timeSent:timeReceived
         })
         managerRequest.save()
         console.log('new request',managerRequest)
-          //creating rooms for message request
-        //   hostels.map(async(data,index)=>{
-        //       hostelsAvaliable.push(data.hostelManaged)
 
-        //       if(hostelName === data.hostelManaged){
-        //         socket.join(hostelName)
-        //         console.log(`incoming message from ${name} to ${hostelName} Hostel `)
-        //         let messageRoom =  await toSpecificHostel(hostelName)
-                 
-            
-        //         io.to(hostelName).emit('join-request',messageRoom)
-        //       }
-        //   }
-        //   )
-        //   console.log('all hostels',hostelsAvaliable)
+    })
+    
+    socket.on('accept-request',async(messenger)=>{
+        const {_id,hostelName,dateReceived,timeSent,picture} = messenger
+        const newMemberAdded = await hostelMembers.create({
+            hostelName:hostelName,
+            dateJoined:dateReceived,
+            studentId:_id,
+            studentPicture:picture
 
+        }) 
+        newMemberAdded.save()
     })
 });
 
@@ -89,14 +89,14 @@ const connection = mongoose.connection
 connection.once("open",()=>{
     console.log('connected to database')
 })
-const uri = "mongodb://127.0.0.1:27017/Chat" && process.env.DB_URI
-mongoose.connect(uri, {
+// const uri = "mongodb://127.0.0.1:27017/Chat" || process.env.DB_URI
+mongoose.connect(process.env.DB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
 
 
 
-server.listen(process.env.PORT,()=>{
+server.listen(process.env.PORT,()=>{    
     console.log(`listening to port ${process.env.PORT}`)
 })

@@ -8,10 +8,9 @@ export default function PopularHostel({
   searchWord,
   hostelFound,
   searchFunction,
+  setRequestSent
 }) {
   // const {socket} = useContext(ContextApp)
-
-  
 
   return (
     <>
@@ -23,6 +22,7 @@ export default function PopularHostel({
           searchWord={searchWord}
           hostelFound={hostelFound}
           searchFunction={() => searchFunction()}
+          setRequestSent={setRequestSent}
         />
       ) : (
         <DefaultHostelSearch />

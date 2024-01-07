@@ -5,6 +5,10 @@
 .student-left-sidebar {
   width: calc(100% - 70%);
   border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5rem;
 }
 .student-right-sidebar {
   width: calc(100% - 40%);
@@ -21,8 +25,8 @@
   font-size: 12px;
   text-align: center;
 }
-.search-bar-container{
-    position: relative;
+.search-bar-container {
+  position: relative;
 }
 .search-bar {
   position: relative;
@@ -35,12 +39,30 @@
   border: 1px solid #ef32ad;
 }
 
-.search-icon{
-    position: relative;
-    right:1rem;
-    top:0.45rem;
-    padding-right: 1rem;
-    font-size: 28px;
-    font-weight: 600;
-    color:blue;
+.search-icon {
+  position: absolute;
+  right: 11rem;
+  top: 0.5rem;
+  color: blue;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+/* .loading-request-container {
+  display: none;
+} */
+
+.to-chat {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 550px) {
+  .search-icon {
+    position: absolute;
+    right: 3.8rem;
+    top: 0.5rem;
+    font-size: 15px;
+    padding-right: 0.2rem;
+    color: #3f32ef;
+  }
 }

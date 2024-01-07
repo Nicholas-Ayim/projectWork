@@ -10,3 +10,8 @@
     width:100%;
     object-fit: contain;
 }
+.loading{
+    float:right;
+    margin-top: -2.5rem;
+    margin-right: 1rem;
+}

@@ -1,0 +1,131 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.main-body {
+  background: blue;
+  padding-top: 0.5rem;
+}
+
+.chat-main-container {
+  display: flex;
+  gap: 0.2rem;
+  height: 100%;
+  width: 100%;
+}
+.chat-left-sidebar {
+  border: 1px solid none;
+  width: calc(100% - 90%);
+  /* height: 100vh; */
+  background-color: rgba(128, 128, 128, 0.591);
+  border-radius: 5px;
+}
+.online-sidebar {
+  border: 1px solid black;
+  width: calc(100% - 70%);
+  /* height: 100vh; */
+  background-color: #eee;
+  border-radius: 5px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
+}
+.main-chat-sidebar {
+  border: 1px solid black;
+  width: calc(100% - 30%);
+  /* height: 100vh; */
+  background-color: white;
+  border-top-left-radius: 20px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+.chat-menu {
+  background-color: blue;
+  height: 20vh;
+}
+.chat-router {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.chat-profile-nav {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background-color: blue;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
+  padding: 0.5rem;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+.chat-profile-nav > small:hover {
+  color: red;
+  transition: all 0.3s ease;
+}
+.chat-image {
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  object-fit: contain;
+  border: 1px solid black;
+}
+
+.chat-app-name,
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.2rem 0.3rem;
+}
+.chat-search {
+  outline: none;
+  width: 100%;
+  height: 15px;
+  border: none;
+  accent-color: white;
+}
+
+.chat-fields {
+  padding-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.3rem;
+  cursor: pointer;
+}
+.chat-fields > div > small:hover {
+  color: red;
+  transition: all 0.3s ease;
+}
+
+.chat-and-icon,
+.contacts-and-icon,
+.groups-and-icon,
+.notification-and-icon {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+}
+.chat-members-online {
+  height: 100vh;
+  background-color: rgba(8, 21, 54, 0.534);
+  border-radius: 10px;
+}
+.exit-chat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.3rem;
+  cursor: pointer;
+  font-size: 18px;
+}
+.exit-chat > small:hover {
+  color: blueviolet;
+  transition: all 0.3s ease;
+}

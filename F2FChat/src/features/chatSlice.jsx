@@ -55,12 +55,19 @@ const contactSlice = createSlice({
           student: null,
           hostelDetails: null,
           managerInfo: null,
-          managerRequest:null,
-          contacts:null
+          managerRequest: null,
+          contacts: null
         };
       }
     );
-  },
+
+    builder.addMatcher(
+      chatApi.endpoints.hostelMembers.matchFulfilled,
+      (state, { payload }) => {
+        return { ...state, allMembers: payload };
+      }
+    );
+  }
 });
 
 export const selectAllManagerInfo = (state) => state.contacts.managerInfo;
@@ -68,5 +75,8 @@ export const filledForm = (state) => state.contacts.student.hostelDetails;
 export const newFilledForm = (state) => state.contacts.hostelDetails;
 export const selectAllContacts = (state) => state.contacts?.student;
 export const selectAll = (state) => state.contacts;
-export const selectAllRequest = (state) => state.contacts.managerRequest
+export const selectAllRequest = (state) => state.contacts.managerRequest;
+export const selectNewRequest = (state) => state.managerRequest;
+export const selectNewMemberAdded = (state) => state.allMembers;
+export const selectAllMembers = (state) => state.contacts.allMembers;
 export default contactSlice.reducer;
