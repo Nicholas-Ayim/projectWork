@@ -69,17 +69,15 @@ const io = new Server(server,{
         console.log('new request',managerRequest)
 
     })
-    
-    socket.on('accept-request',async(messenger)=>{
-        const {_id,hostelName,dateReceived,timeSent,picture} = messenger
-        const newMemberAdded = await hostelMembers.create({
-            hostelName:hostelName,
-            dateJoined:dateReceived,
+    socket.on('accept-request',messenger=>{
+        console.log("the message request",messenger)
+        const {_id,to,dateSent,timeSent,messengerPic,messenger} = messenger
+        const newHostelMember = hostelMembers.create({
+            hostelName:to,
             studentId:_id,
-            studentPicture:picture
-
-        }) 
-        newMemberAdded.save()
+            dateJoined:dateSent,
+        })
+        newHostelMember.save()
     })
 });
 

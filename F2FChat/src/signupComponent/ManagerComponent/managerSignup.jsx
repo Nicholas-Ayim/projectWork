@@ -1,7 +1,7 @@
 import "./managerSignup.css";
 import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import avatar from "/public/images/defaultImages/avatar.jpeg";
+import { Link, useNavigate } from "react-router-dom";
+import avatar from "../../../public/images/avatar.jpeg";
 import { useSignupManagerMutation } from "../../services/chatApi";
 export default function ManagerPage() {
   const imageRef = useRef();
@@ -30,7 +30,7 @@ export default function ManagerPage() {
       setUploaded(true);
       const options = {
         body: newFile,
-        method: "post",
+        method: "post"
       };
       let uploadFile = await fetch(
         "https://api.cloudinary.com/v1_1/nayy-1999/image/upload",
@@ -69,19 +69,19 @@ export default function ManagerPage() {
       hostelManaged,
       contact,
       hostelRegistrationNumber,
-      password,
+      password
     }).then((data) => {
       if (data) {
         console.log("sign up manager", data);
-        navigate('/login/manager')
+        navigate("/login/manager");
       }
     });
   }
 
-  const navigateManagerPage = (e) => {
-    e.preventDefault();
-    navigate("/signup/student");
-  };
+  // const navigateManagerPage = (e) => {
+  //   e.preventDefault();
+  //   navigate("/signup/student");
+  // };
   return (
     <>
       <div className="hostel-manager-container">
@@ -160,10 +160,11 @@ export default function ManagerPage() {
 
           <div className="user-changes">
             <h4>change user</h4>
-            <select>
+            {/* <select>
               <option></option>
               <option onClick={navigateManagerPage}>Student</option>
-            </select>
+            </select> */}
+            <Link to="/signup/student">Student</Link>
           </div>
         </form>
       </div>

@@ -1,7 +1,7 @@
 import "./studentSignUp.css";
-import avatar from "/images/defaultImages/avatar.jpeg";
+import avatar from "../../../public/images/avatar.jpeg";
 import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSignupStudentMutation } from "../../services/chatApi";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAllContacts } from "../../features/chatSlice";
@@ -33,7 +33,7 @@ export default function studentSignup() {
       setUploading(true);
       const options = {
         method: "post",
-        body: newFile,
+        body: newFile
       };
 
       let uploadedFile = await fetch(
@@ -74,19 +74,19 @@ export default function studentSignup() {
       index,
       email,
       contact,
-      password,
+      password
     }).then((data) => {
       if (data) {
         console.log("sign up successfully", data);
-        navigate("/login/student")
+        navigate("/login/student");
       }
     });
   }
 
-  const navigateManagerPage = (e) => {
-    e.preventDefault();
-    navigate("/signup/manager");
-  };
+  // const navigateManagerPage = (e) => {
+  //   e.preventDefault();
+  //   navigate("/signup/manager");
+  // };
   return (
     <>
       <div className="hostel-manager-container">
@@ -97,7 +97,7 @@ export default function studentSignup() {
             accept="image/png, image/jpeg, image/jpg"
             className="plus"
             ref={imageRef}
-            onChange={handleFileChanged}
+            onChange={(e) => handleFileChanged(e)}
           />
           <div className="profile-container">
             <img
@@ -161,10 +161,11 @@ export default function studentSignup() {
 
           <div className="user-changes">
             <h4>change user</h4>
-            <select>
+            {/* <select>
               <option></option>
               <option onClick={navigateManagerPage}>Manager</option>
-            </select>
+            </select> */}
+            <Link to="/signup/manager">Manager</Link>
           </div>
         </form>
       </div>
