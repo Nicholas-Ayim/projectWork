@@ -10,6 +10,8 @@ const hostelMembers = require('./hostelMembers/hostelMembers')
 const app = express()
 const http = require('http')
 const cors = require("cors")
+const { MongoClient, ServerApiVersion } = require('mongodb');
+
 
 const format = require('date-fns/format')
 const server = http.createServer(app)
@@ -43,7 +45,42 @@ const io = new Server(server,{
     }
 })
 
-     
+const uri = process.env.DB_URI
+
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+
+async function run() {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
+
+//database connection
+const mongoose = require("mongoose")
+const connection = mongoose.connection
+connection.once("open",()=>{
+    console.log('connected to database')
+})
+// const uri = "mongodb://127.0.0.1:27017/Chat" || process.env.DB_URI
+mongoose.connect(uri,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
 
   io.on("connection", (socket) => {
 
@@ -71,7 +108,7 @@ const io = new Server(server,{
     })
     socket.on('accept-request',messenger=>{
         console.log("the message request",messenger)
-        const {_id,to,dateSent,timeSent,messengerPic,messenger} = messenger
+        const {_id,to,dateSent,timeSent,messengerPic,messengers} = messenger
         const newHostelMember = hostelMembers.create({
             hostelName:to,
             studentId:_id,
@@ -81,20 +118,13 @@ const io = new Server(server,{
     })
 });
 
-//database connection
-const mongoose = require("mongoose")
-const connection = mongoose.connection
-connection.once("open",()=>{
-    console.log('connected to database')
-})
-// const uri = "mongodb://127.0.0.1:27017/Chat" || process.env.DB_URI
-mongoose.connect(process.env.DB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+
 
 
 
 server.listen(process.env.PORT,()=>{    
     console.log(`listening to port ${process.env.PORT}`)
 })
+
+
+
