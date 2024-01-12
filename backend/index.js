@@ -1,5 +1,5 @@
 const express= require('express')
-require('dotenv').config();
+require('dotenv').config({ path: 'connect.env' });
 // ... rest of your code
 // const cookie = require('cookie-parser')
 const Manager = require("./hostelManagerComponent/hostel")
