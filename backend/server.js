@@ -40,7 +40,7 @@ const { Server} = require("socket.io")
 
 const io = new Server(server,{
     cors:{
-        origin:"https://project-work-1-tan.vercel.app/",
+        origin:"https://project-work-ngs8.vercel.app/",
         methods:["GET","POST"],
         credentials:true
     }
