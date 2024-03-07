@@ -20,7 +20,7 @@ const server = http.createServer(app)
 // app.use(cookie())
 
 app.use(cors({
-     origin:["https://project-work-frontend.vercel.app/contact"],
+     origin:["*"],
         methods:["GET","POST"],
         credentials:true
 }
