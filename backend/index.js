@@ -23,7 +23,8 @@ app.use(cors({
      origin:["https://project-work-api.vercel.app/"],
         methods:["GET","POST"],
         credentials:true
-})
+}
+))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 const contactRoutes = require('./contactRoutes/contactRoutes')
