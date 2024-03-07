@@ -56,16 +56,22 @@ const io = new Server(server,{
     }
 })
 
+
+
 const uri = process.env.DB_URI
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true, // Add this line for modern connection options
+  retryWrites: true, // Add this line to explicitly set retryWrites
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
     deprecationErrors: true,
   }
 });
+
 
 async function run() {
   try {
@@ -81,17 +87,6 @@ async function run() {
 }
 run().catch(console.dir);
 
-//database connection
-const mongoose = require("mongoose")
-const connection = mongoose.connection
-connection.once("open",()=>{
-    console.log('connected to database')
-})
-// const uri = "mongodb://127.0.0.1:27017/Chat" || process.env.DB_URI
-mongoose.connect(uri,{
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
 
   io.on("connection", (socket) => {
 
