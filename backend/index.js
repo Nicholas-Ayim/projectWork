@@ -20,7 +20,7 @@ const server = http.createServer(app)
 // app.use(cookie())
 
 app.use(cors({
-     origin:"https://project-work-api.vercel.app/",
+     origin:["https://project-work-api.vercel.app/"],
         methods:["GET","POST"],
         credentials:true
 })
