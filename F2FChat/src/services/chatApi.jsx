@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const chatApi = createApi({
   reducerPath: "chatApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/contact"
+    baseUrl: "https://project-work-api.vercel.app/contact"
   }),
   endpoints: (builder) => ({
     managerProfile: builder.mutation({
