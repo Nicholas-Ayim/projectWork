@@ -16,11 +16,10 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const format = require('date-fns/format')
 const server = http.createServer(app)
 
-//app.use(cors())
-// app.use(cookie())
+
 
 app.use(cors({
-     origin:["*"],
+     origin:["https://project-work-frontend.vercel.app/"],
         methods:["GET","POST"],
         credentials:true
 }
